@@ -1,7 +1,7 @@
-# ATMOS — Weather App
+# ATMOS - Weather App
 
 ATMOS is a single-page weather app that gives you real-time weather data for any city worldwide.
-Built with pure HTML, CSS, and JavaScript — no frameworks, no build tools.
+Built with pure HTML, CSS, and JavaScript, no frameworks, no build tools.
 Fetches live data from [WeatherAPI](https://www.weatherapi.com/) including temperature, air quality, wind, humidity, and more,
 all wrapped in a minimal dark UI.
 
