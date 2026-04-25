@@ -1,4 +1,4 @@
-# ATMOS — Weather App
+# ATMOS - Weather App
 
 A dark-themed weather app built with HTML, CSS, and JavaScript using the [WeatherAPI](https://www.weatherapi.com).
 
