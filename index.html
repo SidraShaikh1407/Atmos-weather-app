@@ -5,9 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ATMOS — Weather</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0a0c10;
@@ -21,9 +19,7 @@
       --danger: #f87171;
     }
 
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -37,11 +33,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
       position: relative;
+      padding: 16px;
     }
 
-    /* Animated background */
     body::before {
       content: '';
       position: fixed;
@@ -77,7 +72,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 40px;
+      margin-bottom: 28px;
     }
 
     .logo {
@@ -88,9 +83,7 @@
       text-transform: uppercase;
     }
 
-    .logo span {
-      color: var(--muted);
-    }
+    .logo span { color: var(--muted); }
 
     .header-tag {
       font-family: 'DM Mono', monospace;
@@ -99,6 +92,25 @@
       border: 1px solid var(--border);
       padding: 4px 10px;
       border-radius: 20px;
+    }
+
+    /* Tagline */
+    .tagline {
+      margin-bottom: 28px;
+    }
+
+    .tagline-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .tagline-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
     }
 
     /* Search */
@@ -121,9 +133,7 @@
       caret-color: var(--accent);
     }
 
-    .search-wrap input::placeholder {
-      color: var(--muted);
-    }
+    .search-wrap input::placeholder { color: var(--muted); }
 
     .search-wrap input:focus {
       border-color: rgba(110, 231, 247, 0.3);
@@ -148,15 +158,8 @@
       color: #0a0c10;
     }
 
-    .search-btn:hover {
-      opacity: 0.85;
-      transform: translateY(-50%) scale(1.05);
-    }
-
-    .search-btn svg {
-      width: 16px;
-      height: 16px;
-    }
+    .search-btn:hover { opacity: 0.85; transform: translateY(-50%) scale(1.05); }
+    .search-btn svg { width: 16px; height: 16px; }
 
     /* Loading */
     .loader {
@@ -169,9 +172,7 @@
       letter-spacing: 0.1em;
     }
 
-    .loader.active {
-      display: block;
-    }
+    .loader.active { display: block; }
 
     .loader-bar {
       width: 100%;
@@ -191,13 +192,8 @@
     }
 
     @keyframes load {
-      0% {
-        transform: translateX(-100%);
-      }
-
-      100% {
-        transform: translateX(350%);
-      }
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(350%); }
     }
 
     /* Error */
@@ -213,9 +209,7 @@
       margin-bottom: 20px;
     }
 
-    .error-msg.active {
-      display: block;
-    }
+    .error-msg.active { display: block; }
 
     /* Card */
     .card {
@@ -227,20 +221,11 @@
       animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .card.active {
-      display: block;
-    }
+    .card.active { display: block; }
 
     @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .card-top {
@@ -257,12 +242,7 @@
       margin-bottom: 20px;
     }
 
-    .location-line svg {
-      width: 14px;
-      height: 14px;
-      color: var(--accent);
-      flex-shrink: 0;
-    }
+    .location-line svg { width: 14px; height: 14px; color: var(--accent); flex-shrink: 0; }
 
     .location-name {
       font-size: 13px;
@@ -314,9 +294,7 @@
       color: var(--muted);
     }
 
-    .feels-like span {
-      color: var(--accent);
-    }
+    .feels-like span { color: var(--accent); }
 
     .condition-row {
       margin-top: 16px;
@@ -334,6 +312,7 @@
       align-items: center;
       justify-content: center;
       font-size: 22px;
+      flex-shrink: 0;
     }
 
     .condition-text {
@@ -428,16 +407,31 @@
       transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .local-time {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--muted);
-      text-align: center;
-      padding: 0 28px 20px;
+    /* Responsive */
+    @media (max-width: 480px) {
+      .app { padding: 16px; }
+      .header { margin-bottom: 20px; }
+      .tagline-title { font-size: 18px; }
+      .tagline-sub { font-size: 11px; }
+      .temp-main { font-size: 52px; }
+      .card-top { padding: 18px 18px 14px; }
+      .card-bottom {
+        padding: 14px 18px 18px;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .aqi-bar-wrap { grid-column: span 2; }
+      .stat-value { font-size: 15px; }
     }
 
-    .local-time span {
-      color: var(--accent);
+    @media (max-width: 360px) {
+      .temp-main { font-size: 42px; }
+      .temp-unit { font-size: 22px; }
+      .stat-value { font-size: 13px; }
+    }
+
+    @media (min-width: 768px) {
+      .app { max-width: 520px; }
     }
   </style>
 </head>
@@ -450,203 +444,193 @@
       <div class="logo">ATMOS<span> //</span></div>
       <div class="header-tag">Weather v1.0</div>
     </div>
-    <!-- ADD HERE -->
-    <div style="margin-bottom: 28px;">
-      <div style="font-size: 22px; font-weight: 800; color: #e8eaf0; margin-bottom: 6px;">
-        Real-time weather, anywhere.
-      </div>
-      <div style="font-family: 'DM Mono', monospace; font-size: 12px; color: #5a5f72; line-height: 1.6;">
-        Enter a city name to instantly get real-time atmospheric data —<br>temperature, air quality index, wind speed,
-        humidity, UV index & more.
-      </div>
+
+    <div class="tagline">
+      <div class="tagline-title">Real-time weather, anywhere.</div>
+      <div class="tagline-sub">Enter a city name to instantly get real-time atmospheric data — temperature, air quality index, wind speed, humidity, UV index & more.</div>
     </div>
 
-    <!-- search -->
     <div class="search-wrap">
-      <div class="search-wrap">
-        <input type="text" id="locationInput" placeholder="Enter city name…" autocomplete="off" />
-        <button class="search-btn" onclick="getWeather()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-            stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-        </button>
-      </div>
-
-      <div class="error-msg" id="errorMsg"></div>
-
-      <div class="loader" id="loader">
-        <div class="loader-bar">
-          <div class="loader-fill"></div>
-        </div>
-        FETCHING ATMOSPHERIC DATA…
-      </div>
-
-      <div class="card" id="card">
-        <div class="card-top">
-          <div class="location-line">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
-            <span class="location-name" id="cityName">—</span>
-            <span class="location-country" id="countryName"></span>
-          </div>
-
-          <div class="temp-row">
-            <div class="temp-main" id="tempC">—</div>
-            <div class="temp-unit">°C</div>
-            <div class="temp-right">
-              <div class="feels-like">FEELS LIKE <span id="feelsLike">—</span>°C</div>
-              <div class="feels-like" id="tempF" style="color:var(--muted)"></div>
-            </div>
-          </div>
-
-          <div class="condition-row">
-            <div class="condition-icon" id="condIcon">—</div>
-            <div>
-              <div class="condition-text" id="condText">—</div>
-              <div class="condition-sub" id="localTime">—</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-bottom">
-          <div class="stat">
-            <div class="stat-label">Humidity</div>
-            <div class="stat-value" id="humidity">—<small>%</small></div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Wind</div>
-            <div class="stat-value" id="wind">—<small> km/h</small></div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Visibility</div>
-            <div class="stat-value" id="visibility">—<small> km</small></div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">UV Index</div>
-            <div class="stat-value" id="uv">—</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Pressure</div>
-            <div class="stat-value" id="pressure">—<small> mb</small></div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Cloud Cover</div>
-            <div class="stat-value" id="cloud">—<small>%</small></div>
-          </div>
-
-          <div class="aqi-bar-wrap">
-            <div class="aqi-header">
-              <div class="aqi-label">Air Quality Index</div>
-              <div class="aqi-badge" id="aqiBadge">—</div>
-            </div>
-            <div class="aqi-track">
-              <div class="aqi-fill" id="aqiFill" style="width:0%"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <input type="text" id="locationInput" placeholder="Enter city name…" autocomplete="off" />
+      <button class="search-btn" onclick="getWeather()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+      </button>
     </div>
 
-    <script>
-      const API_KEY = '21a515492d2343d48c094143262504';
+    <div class="error-msg" id="errorMsg"></div>
 
-      const input = document.getElementById('locationInput');
-      input.addEventListener('keydown', e => { if (e.key === 'Enter') getWeather(); });
+    <div class="loader" id="loader">
+      <div class="loader-bar">
+        <div class="loader-fill"></div>
+      </div>
+      FETCHING ATMOSPHERIC DATA…
+    </div>
 
-      function getConditionEmoji(code, isDay) {
-        if (code === 1000) return isDay ? '☀️' : '🌙';
-        if ([1003].includes(code)) return '⛅';
-        if ([1006, 1009].includes(code)) return '☁️';
-        if ([1030, 1135, 1147].includes(code)) return '🌫️';
-        if ([1063, 1150, 1153, 1180, 1183, 1240].includes(code)) return '🌦️';
-        if ([1186, 1189, 1192, 1195, 1243, 1246].includes(code)) return '🌧️';
-        if ([1210, 1213, 1216, 1219, 1222, 1225, 1255, 1258].includes(code)) return '❄️';
-        if ([1087, 1273, 1276, 1279, 1282].includes(code)) return '⛈️';
-        return '🌡️';
-      }
+    <div class="card" id="card">
+      <div class="card-top">
+        <div class="location-line">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          <span class="location-name" id="cityName">—</span>
+          <span class="location-country" id="countryName"></span>
+        </div>
 
-      function getAQI(aqi) {
-        const map = {
-          1: { label: 'GOOD', color: '#6ee7b7', pct: 10 },
-          2: { label: 'MODERATE', color: '#fbbf24', pct: 35 },
-          3: { label: 'UNHEALTHY·S', color: '#f97316', pct: 55 },
-          4: { label: 'UNHEALTHY', color: '#ef4444', pct: 75 },
-          5: { label: 'VERY BAD', color: '#a855f7', pct: 90 },
-          6: { label: 'HAZARDOUS', color: '#7f1d1d', pct: 100 },
-        };
-        return map[aqi] || { label: 'N/A', color: 'var(--muted)', pct: 0 };
-      }
+        <div class="temp-row">
+          <div class="temp-main" id="tempC">—</div>
+          <div class="temp-unit">°C</div>
+          <div class="temp-right">
+            <div class="feels-like">FEELS LIKE <span id="feelsLike">—</span>°C</div>
+            <div class="feels-like" id="tempF" style="color:var(--muted)"></div>
+          </div>
+        </div>
 
-      async function getWeather() {
-        const city = input.value.trim();
-        if (!city) return;
+        <div class="condition-row">
+          <div class="condition-icon" id="condIcon">—</div>
+          <div>
+            <div class="condition-text" id="condText">—</div>
+            <div class="condition-sub" id="localTime">—</div>
+          </div>
+        </div>
+      </div>
 
-        const loader = document.getElementById('loader');
-        const card = document.getElementById('card');
-        const errorMsg = document.getElementById('errorMsg');
+      <div class="card-bottom">
+        <div class="stat">
+          <div class="stat-label">Humidity</div>
+          <div class="stat-value" id="humidity">—<small>%</small></div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Wind</div>
+          <div class="stat-value" id="wind">—<small> km/h</small></div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Visibility</div>
+          <div class="stat-value" id="visibility">—<small> km</small></div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">UV Index</div>
+          <div class="stat-value" id="uv">—</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Pressure</div>
+          <div class="stat-value" id="pressure">—<small> mb</small></div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Cloud Cover</div>
+          <div class="stat-value" id="cloud">—<small>%</small></div>
+        </div>
 
-        loader.classList.add('active');
-        card.classList.remove('active');
-        errorMsg.classList.remove('active');
+        <div class="aqi-bar-wrap">
+          <div class="aqi-header">
+            <div class="aqi-label">Air Quality Index</div>
+            <div class="aqi-badge" id="aqiBadge">—</div>
+          </div>
+          <div class="aqi-track">
+            <div class="aqi-fill" id="aqiFill" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        try {
-          const res = await fetch(
-            `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${encodeURIComponent(city)}&aqi=yes`
-          );
-          const data = await res.json();
+  </div>
 
-          if (!res.ok && !data.error) {
-            throw new Error(`HTTP ${res.status} — Check API key or network`);
-          }
-          if (data.error) {
-            throw new Error(`[${data.error.code}] ${data.error.message}`);
-          }
+  <script>
+    const API_KEY = '21a515492d2343d48c094143262504';
 
-          const { location, current } = data;
+    const input = document.getElementById('locationInput');
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') getWeather(); });
 
-          document.getElementById('cityName').textContent = location.name;
-          document.getElementById('countryName').textContent = `${location.region ? location.region + ', ' : ''}${location.country}`;
-          document.getElementById('tempC').textContent = Math.round(current.temp_c);
-          document.getElementById('feelsLike').textContent = Math.round(current.feelslike_c);
-          document.getElementById('tempF').textContent = Math.round(current.temp_f) + '°F';
-          document.getElementById('condText').textContent = current.condition.text;
-          document.getElementById('condIcon').textContent = getConditionEmoji(current.condition.code, current.is_day);
-          document.getElementById('localTime').textContent = 'LOCAL · ' + location.localtime;
-          document.getElementById('humidity').innerHTML = `${current.humidity}<small>%</small>`;
-          document.getElementById('wind').innerHTML = `${current.wind_kph}<small> km/h</small>`;
-          document.getElementById('visibility').innerHTML = `${current.vis_km}<small> km</small>`;
-          document.getElementById('uv').textContent = current.uv;
-          document.getElementById('pressure').innerHTML = `${current.pressure_mb}<small> mb</small>`;
-          document.getElementById('cloud').innerHTML = `${current.cloud}<small>%</small>`;
+    function getConditionEmoji(code, isDay) {
+      if (code === 1000) return isDay ? '☀️' : '🌙';
+      if ([1003].includes(code)) return '⛅';
+      if ([1006, 1009].includes(code)) return '☁️';
+      if ([1030, 1135, 1147].includes(code)) return '🌫️';
+      if ([1063, 1150, 1153, 1180, 1183, 1240].includes(code)) return '🌦️';
+      if ([1186, 1189, 1192, 1195, 1243, 1246].includes(code)) return '🌧️';
+      if ([1210, 1213, 1216, 1219, 1222, 1225, 1255, 1258].includes(code)) return '❄️';
+      if ([1087, 1273, 1276, 1279, 1282].includes(code)) return '⛈️';
+      return '🌡️';
+    }
 
-          // AQI
-          const aqiVal = current.air_quality?.['us-epa-index'];
-          const aqiInfo = getAQI(aqiVal);
-          const badge = document.getElementById('aqiBadge');
-          badge.textContent = aqiInfo.label;
-          badge.style.background = aqiInfo.color + '22';
-          badge.style.color = aqiInfo.color;
-          badge.style.border = '1px solid ' + aqiInfo.color + '44';
-          const fill = document.getElementById('aqiFill');
-          fill.style.background = aqiInfo.color;
-          setTimeout(() => fill.style.width = aqiInfo.pct + '%', 50);
+    function getAQI(aqi) {
+      const map = {
+        1: { label: 'GOOD',        color: '#6ee7b7', pct: 10 },
+        2: { label: 'MODERATE',    color: '#fbbf24', pct: 35 },
+        3: { label: 'UNHEALTHY·S', color: '#f97316', pct: 55 },
+        4: { label: 'UNHEALTHY',   color: '#ef4444', pct: 75 },
+        5: { label: 'VERY BAD',    color: '#a855f7', pct: 90 },
+        6: { label: 'HAZARDOUS',   color: '#7f1d1d', pct: 100 },
+      };
+      return map[aqi] || { label: 'N/A', color: 'var(--muted)', pct: 0 };
+    }
 
-          loader.classList.remove('active');
-          card.classList.add('active');
+    async function getWeather() {
+      const city = input.value.trim();
+      if (!city) return;
 
-        } catch (err) {
-          loader.classList.remove('active');
-          errorMsg.textContent = '⚠ ' + (err.message || 'Could not fetch weather data.');
-          errorMsg.classList.add('active');
+      const loader = document.getElementById('loader');
+      const card = document.getElementById('card');
+      const errorMsg = document.getElementById('errorMsg');
+
+      loader.classList.add('active');
+      card.classList.remove('active');
+      errorMsg.classList.remove('active');
+
+      try {
+        const res = await fetch(
+          `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${encodeURIComponent(city)}&aqi=yes`
+        );
+        const data = await res.json();
+
+        if (!res.ok && !data.error) {
+          throw new Error(`HTTP ${res.status} — Check API key or network`);
         }
+        if (data.error) {
+          throw new Error(`[${data.error.code}] ${data.error.message}`);
+        }
+
+        const { location, current } = data;
+
+        document.getElementById('cityName').textContent = location.name;
+        document.getElementById('countryName').textContent = `${location.region ? location.region + ', ' : ''}${location.country}`;
+        document.getElementById('tempC').textContent = Math.round(current.temp_c);
+        document.getElementById('feelsLike').textContent = Math.round(current.feelslike_c);
+        document.getElementById('tempF').textContent = Math.round(current.temp_f) + '°F';
+        document.getElementById('condText').textContent = current.condition.text;
+        document.getElementById('condIcon').textContent = getConditionEmoji(current.condition.code, current.is_day);
+        document.getElementById('localTime').textContent = 'LOCAL · ' + location.localtime;
+        document.getElementById('humidity').innerHTML = `${current.humidity}<small>%</small>`;
+        document.getElementById('wind').innerHTML = `${current.wind_kph}<small> km/h</small>`;
+        document.getElementById('visibility').innerHTML = `${current.vis_km}<small> km</small>`;
+        document.getElementById('uv').textContent = current.uv;
+        document.getElementById('pressure').innerHTML = `${current.pressure_mb}<small> mb</small>`;
+        document.getElementById('cloud').innerHTML = `${current.cloud}<small>%</small>`;
+
+        const aqiVal = current.air_quality?.['us-epa-index'];
+        const aqiInfo = getAQI(aqiVal);
+        const badge = document.getElementById('aqiBadge');
+        badge.textContent = aqiInfo.label;
+        badge.style.background = aqiInfo.color + '22';
+        badge.style.color = aqiInfo.color;
+        badge.style.border = '1px solid ' + aqiInfo.color + '44';
+        const fill = document.getElementById('aqiFill');
+        fill.style.background = aqiInfo.color;
+        setTimeout(() => fill.style.width = aqiInfo.pct + '%', 50);
+
+        loader.classList.remove('active');
+        card.classList.add('active');
+
+      } catch (err) {
+        loader.classList.remove('active');
+        errorMsg.textContent = '⚠ ' + (err.message || 'Could not fetch weather data.');
+        errorMsg.classList.add('active');
       }
-    </script>
+    }
+  </script>
 </body>
 
 </html>
